@@ -1,10 +1,12 @@
 import os
 import cv2
+from sklearn.feature_extraction import img_to_graph
 import torch
 import numpy as np
 from models import ResnetGenerator
 import argparse
 from utils import Preprocess
+
 
 
 parser = argparse.ArgumentParser()
@@ -61,3 +63,16 @@ if __name__ == '__main__':
     if cartoon is not None:
         cv2.imwrite(args.save_path, cartoon)
         print('Cartoon portrait has been saved successfully!')
+
+    st.title("Photo to Cartoon Web App")
+    st.write("This App is to convert your photos to cartoon")
+
+    st.sidebar.file_uploader("Upload your photo", type=["jpeg","jpg","png"])
+
+    if img is None:
+        st.write("You haven't write any image file")
+    else:
+        st.write("**Input Photo**")
+        st.image(img)
+        st.write("**Output Cartoon")
+        st.image(cartoon)
